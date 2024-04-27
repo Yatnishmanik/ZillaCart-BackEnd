@@ -10,7 +10,7 @@ exports.isAuthenticated = async (req, res, next) => {
     if (!token) {
         return next(new ErrorResponse('You must Log In...', 401));
     }
-
+    console.log("**********************************")
     try {
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

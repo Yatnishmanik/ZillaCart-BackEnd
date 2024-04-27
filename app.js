@@ -12,6 +12,7 @@ const helmet = require('helmet');
 const xss = require("xss-clean");
 const rateLimit = require('express-rate-limit')
 const hpp = require('hpp');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 
@@ -58,6 +59,19 @@ app.use(
     }
   })
 )
+
+app.use('/socket.io', createProxyMiddleware({
+  target: 'https://zillacart-backend.onrender.com',
+  changeOrigin: true,
+  ws: true,
+  onError: (err, req, res) => {
+    res.writeHead(500, {
+      'Content-Type': 'text/plain',
+    });
+    res.end('Proxy error: Could not connect to proxy.');
+  }
+}));
+
 // prevent Cross-site Scripting XSS
 app.use(xss());
 //limit queries per 15mn
