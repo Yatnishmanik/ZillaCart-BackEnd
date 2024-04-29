@@ -33,10 +33,11 @@ const postRoute = require('./routes/postRoute');
 
 
 //database connection
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE, {
+  
+})
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
-
   app.set('trust proxy', 1);
 //MIDDLEWARE
 app.use(morgan('dev'));
@@ -61,7 +62,7 @@ app.use(
 )
 
 app.use('/socket.io', createProxyMiddleware({
-  target: 'https://zillacart-backend.onrender.com',
+  target: 'http://localhost:3000',
   changeOrigin: true,
   ws: true,
   onError: (err, req, res) => {

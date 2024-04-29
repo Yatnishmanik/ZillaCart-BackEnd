@@ -82,7 +82,7 @@ exports.deletePost = async (req, res, next) => {
     if (ImgId) {
         await cloudinary.uploader.destroy(ImgId);
     }
-
+    
     try {
         const post = await Post.findByIdAndRemove(req.params.id);
         res.status(200).json({

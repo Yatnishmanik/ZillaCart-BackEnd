@@ -63,7 +63,7 @@ exports.deletesidePost = async (req, res, next) => {
         await cloudinary.uploader.destroy(ImgId);
     }
     try {
-        const post = await Sidebarpost.findByIdAndRemove(req.params.id);
+        const post = await Sidebarpost.findByIdAndDelete(req.params.id);
         res.status(200).json({
             success: true,
             message: "post deleted"
