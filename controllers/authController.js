@@ -50,6 +50,7 @@ exports.signin = async (req, res, next) => {
 
 const sendTokenResponse = async (user, codeStatus, res) => {
     const token = await user.getJwtToken();
+    console.log("&*&^^^^^^^",token);
     const options = { maxAge: 60 * 60 * 1000, httpOnly: true }
     if (process.env.NODE_ENV === 'production') {
         options.secure = true
@@ -60,7 +61,8 @@ const sendTokenResponse = async (user, codeStatus, res) => {
         .json({
             success: true,
             id: user._id,
-            role: user.role
+            role: user.role,
+            token:token
         })
 }
 
