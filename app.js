@@ -67,7 +67,7 @@ app.use(
 )
 
 app.use('/socket.io', createProxyMiddleware({
-  target: 'http://localhost:3000',
+  target: 'https://zillacart-backend.onrender.com',
   changeOrigin: true,
   ws: true,
   onError: (err, req, res) => {
