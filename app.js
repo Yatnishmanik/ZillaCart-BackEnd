@@ -46,8 +46,13 @@ app.use(bodyParser.urlencoded({
   limit: "5mb",
   extended: true
 }));
+
+const corsOptions = {
+  origin: ['https://zillacart-backend.onrender.com', 'http://localhost:3000'], // Live and local URLs
+  credentials: true, // This must be true to support sending cookies
+};
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // prevent SQL injection
 app.use(mongoSanitize());
