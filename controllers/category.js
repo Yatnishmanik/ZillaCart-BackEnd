@@ -7,8 +7,7 @@ exports. createCategory = async (req, res, next) => {
     name: req.body.name,
     description: req.body.description,
   });
-  var { name, description } = req.body;
-  name = name.trim().toLowerCase();
+  var { name } = req.body;
   try {
     const existingCategory = await Category.findOne({ name });
     if (existingCategory) {
